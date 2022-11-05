@@ -1,6 +1,6 @@
 import GlobalStyle from './styles/GlobalStyle';
 import { Reset } from 'styled-reset';
-import Router from './router/Routers';
+import Router from './router/Router';
 import { Helmet } from 'react-helmet-async';
 
 function App() {
