@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { ReactComponent as HeaderBar } from '../../assets/icons/alarm.svg';
 
-const Header = () => {
+const GlobalHeader = () => {
   return (
     <Wrapper>
       <StyledHeaderBar />
@@ -25,4 +25,4 @@ const StyledHeaderBar = styled(HeaderBar)`
   }
 `;
 
-export default Header;
+export default GlobalHeader;
