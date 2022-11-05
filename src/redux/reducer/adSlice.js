@@ -4,13 +4,14 @@ const initialState = {
   item: [],
   isLoading: false,
   isError: false,
+  isPage: false,
 };
 
 // 마이 페이지 차트
 export const __adItems = createAsyncThunk('dash/__DashBoardCharts', async (arg, thunkAPI) => {
   try {
     // const { data } = await apis.my_page_chart();
-    return thunkAPI.fulfillWithValue(data);
+    return thunkAPI.fulfillWithValue();
   } catch (e) {
     return thunkAPI.rejectWithValue(e);
   }
@@ -19,7 +20,14 @@ export const __adItems = createAsyncThunk('dash/__DashBoardCharts', async (arg, 
 export const adSlice = createSlice({
   name: 'adSlice',
   initialState,
-  reducers: {},
+  reducers: {
+    isAdPageOn: state => {
+      state.isPage = true;
+    },
+    isAdPageOff: state => {
+      state.isPage = false;
+    },
+  },
   extraReducers: {
     [__adItems.pending]: state => {
       state.isLoading = true;
@@ -35,5 +43,5 @@ export const adSlice = createSlice({
   },
 });
 
-export const {} = adSlice.actions;
+export const { isAdPageOn, isAdPageOff } = adSlice.actions;
 export default adSlice.reducer;

@@ -4,9 +4,20 @@ import Label from './Label';
 import { ReactComponent as DropDownIcon } from '../../assets/icons/arrowDropDown.svg';
 import { ReactComponent as MenuDashBoardIcon } from '../../assets/icons/menuDashBoardIcon.svg';
 import { ReactComponent as MenuAddManageIcon } from '../../assets/icons/menuAddManage.svg';
-import H1 from './fonts/H1';
+import { useNavigate } from 'react-router';
+import { useDispatch, useSelector } from 'react-redux';
+import { isAdPageOn, isAdPageOff } from '../../redux/reducer/adSlice';
+import { isDashPageOn, isDashPageOff } from '../../redux/reducer/dashSlice';
 
 const SideBar = () => {
+  const isDashBoardPage = useSelector(state => state.dashBoard.isPage);
+  const isAdManagerPage = useSelector(state => state.adManager.isPage);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const onPathHandler = path => {
+    navigate(path);
+  };
+
   return (
     <Wrapper>
       <Logo src={process.env.PUBLIC_URL + '/img/lever_logo.png'} />
@@ -24,12 +35,26 @@ const SideBar = () => {
         <MenuWrapper>
           <Label fontWeight={700} txt={'광고 센터'} />
           <ButtonWrapper>
-            <Button>
-              <StyledMenuDashBoardIcon />
+            <Button
+              active={isDashBoardPage ? 'active' : ''}
+              onClick={() => {
+                onPathHandler('/');
+                dispatch(isDashPageOn());
+                dispatch(isAdPageOff());
+              }}
+            >
+              <StyledMenuDashBoardIcon active={isDashBoardPage ? 'active' : ''} />
               대시보드
             </Button>
-            <Button>
-              <StyledMenuAddManageIcon />
+            <Button
+              active={isAdManagerPage ? 'active' : ''}
+              onClick={() => {
+                onPathHandler('/ad');
+                dispatch(isAdPageOn());
+                dispatch(isDashPageOff());
+              }}
+            >
+              <StyledMenuAddManageIcon active={isAdManagerPage ? 'active' : ''} />
               광고관리
             </Button>
           </ButtonWrapper>
@@ -109,7 +134,8 @@ const ButtonWrapper = styled.div`
 const Button = styled.button`
   width: 24rem;
   height: 6rem;
-  background-color: transparent;
+  color: ${props =>
+    props.active === 'active' ? props.theme.sideHoverTxtColor : props.theme.mainTxtColor};
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
@@ -117,11 +143,14 @@ const Button = styled.button`
   border: none;
   border-radius: 1rem;
   padding: 0 3rem;
-  color: ${({ theme }) => theme.mainTxtColor};
+  /* color: ${({ props, theme }) => theme.mainTxtColor}; */
+  background-color: ${props =>
+    props.active === 'active' ? props.theme.sideHoverGray : 'transparent'};
   font-weight: 700;
   font-size: 1.6rem;
   line-height: 1.9rem;
   cursor: pointer;
+
   &:hover {
     background-color: ${({ theme }) => theme.sideHoverGray};
     color: ${({ theme }) => theme.sideHoverTxtColor};
@@ -135,14 +164,16 @@ const Button = styled.button`
 const StyledMenuDashBoardIcon = styled(MenuDashBoardIcon)`
   margin-right: 1.2rem;
   path {
-    fill: ${({ theme }) => theme.mainTxtColor};
+    fill: ${props =>
+      props.active === 'active' ? props.theme.sideHoverTxtColor : props.theme.mainTxtColor};
   }
 `;
 
 const StyledMenuAddManageIcon = styled(MenuAddManageIcon)`
   margin-right: 1.2rem;
   path {
-    fill: ${({ theme }) => theme.mainTxtColor};
+    fill: ${props =>
+      props.active === 'active' ? props.theme.sideHoverTxtColor : props.theme.mainTxtColor};
   }
 `;
 
