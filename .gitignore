@@ -21,3 +21,9 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+#git-commit-template
+git-commit-template.txt
+
+#env
+.env
