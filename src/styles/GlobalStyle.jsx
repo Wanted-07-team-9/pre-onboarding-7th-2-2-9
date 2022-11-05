@@ -19,14 +19,24 @@ h1, h2, h3, h4, h5 {
 }
 :root {
     font-size: 10px;
-  }
+}
+h1 {
+  font-weight: 700;
+  font-size: 1.6rem;
+  line-height: 1.9rem;
+  color: #3A474E;
+}
+p {
+  font-size: 1.2rem;
+  line-height: 1.4rem;
+  font-weight: 500;
+}
 a {
 	text-decoration: underline;
   cursor: pointer;
 }
 /* Layout */
 html {
-    max-width: 450px;
     margin: 0 auto;
 }
 `;

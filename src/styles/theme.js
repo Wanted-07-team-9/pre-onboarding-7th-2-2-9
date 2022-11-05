@@ -11,24 +11,28 @@ const theme = {
   black: '#000000',
 
   /* txt */
-  mainTxt: '#3A474E',
-  subTxt: '#94A2AD',
+  mainTxtColor: '#3A474E',
+  InfoTxtColor: '#94A2AD',
+  labelTxtColor: '#94A2AD',
+
+  /* select button */
+  borderColor: '#D1D8DC',
 
   /* 사이드바 */
-  hoverBg: '#EDEFF1',
-  hoverTxt: '#586CF5',
-  boxBg: '#E5F4FD',
-  boxIcon: '#586CF5',
+  sideHoverGray: '#EDEFF1',
+  sideHoverTxtColor: '#586CF5',
+  SideboxBgColor: '#E5F4FD',
+  SideboxIconColor: '#586CF5',
 
   /* 통합 광고 현황 */
   dashred: '#EA3A4B',
   dashgreen: '#85DA47',
   dashblue: '#4FADF7',
-  dashBorder: '#EDEFF1',
+  dashBorderColor: '#EDEFF1',
 
   /* 광고 관리  */
-  adBorder: '#D1D8DC',
-  adInfoBorder: '#EDEFF1',
+  adBorderColor: '#D1D8DC',
+  adInfoBorderColor: '#EDEFF1',
 };
 
 export default theme;
