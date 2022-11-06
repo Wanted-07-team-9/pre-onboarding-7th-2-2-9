@@ -1,17 +1,22 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { apis } from '../../api/apis';
 
 const initialState = {
-  item: [],
+  adList: [],
+  activeAdList: [],
+  endedAdList: [],
+  resultAdList: [],
   isLoading: false,
   isError: false,
   isPage: false,
+  adFilterStatus: 'all',
 };
 
-// 마이 페이지 차트
-export const __adItems = createAsyncThunk('dash/__DashBoardCharts', async (arg, thunkAPI) => {
+// get adList
+export const __getAdList = createAsyncThunk('dash/__DashBoardCharts', async (arg, thunkAPI) => {
   try {
-    // const { data } = await apis.my_page_chart();
-    return thunkAPI.fulfillWithValue();
+    const res = await apis.getAdList();
+    return thunkAPI.fulfillWithValue(res.data.ads);
   } catch (e) {
     return thunkAPI.rejectWithValue(e);
   }
@@ -27,21 +32,37 @@ export const adSlice = createSlice({
     isAdPageOff: state => {
       state.isPage = false;
     },
+    setAdStatus: (state, action) => {
+      state.adFilterStatus = action.payload.status;
+      switch (state.adFilterStatus) {
+        case 'active':
+          state.activeAdList = state.adList.filter(ad => ad.status === 'active');
+          state.resultAdList = state.activeAdList;
+          break;
+        case 'ended':
+          state.endedAdList = state.adList.filter(ad => ad.status === 'ended');
+          state.resultAdList = state.endedAdList;
+          break;
+      }
+    },
   },
-  extraReducers: {
-    [__adItems.pending]: state => {
-      state.isLoading = true;
-    },
-    [__adItems.fulfilled]: (state, action) => {
-      state.isLoading = false;
-      state.item = action.payload;
-    },
-    [__adItems.rejected]: (state, action) => {
-      state.isLoading = false;
-      state.error = action.payload;
-    },
+  extraReducers: builder => {
+    builder
+      .addCase(__getAdList.pending, (state, action) => {
+        state.isLoading = true;
+      })
+      .addCase(__getAdList.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.adList = action.payload;
+        state.resultAdList = action.payload;
+        state.adFilterStatus = action.payload.status;
+      })
+      .addCase(__getAdList.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = action.payload;
+      });
   },
 });
 
-export const { isAdPageOn, isAdPageOff } = adSlice.actions;
+export const { isAdPageOn, isAdPageOff, setAdStatus } = adSlice.actions;
 export default adSlice.reducer;

@@ -32,6 +32,7 @@ const theme = {
 
   /* 광고 관리  */
   adBorderColor: '#D1D8DC',
+  adBorderLineColor: '##EDEFF1',
   adInfoBorderColor: '#EDEFF1',
 };
 

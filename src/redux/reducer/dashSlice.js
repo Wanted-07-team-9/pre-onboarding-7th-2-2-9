@@ -31,18 +31,19 @@ export const dashSlice = createSlice({
       state.isPage = false;
     },
   },
-  extraReducers: {
-    [__DashBoardCharts.pending]: state => {
-      state.isLoading = true;
-    },
-    [__DashBoardCharts.fulfilled]: (state, action) => {
-      state.isLoading = false;
-      state.item = action.payload;
-    },
-    [__DashBoardCharts.rejected]: (state, action) => {
-      state.isLoading = false;
-      state.error = action.payload;
-    },
+  extraReducers: builder => {
+    builder
+      .addCase(__DashBoardCharts.pending, (state, action) => {
+        state.isLoading = true;
+      })
+      .addCase(__DashBoardCharts.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.item = action.payload;
+      })
+      .addCase(__DashBoardCharts.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = action.payload;
+      });
   },
 });
 
