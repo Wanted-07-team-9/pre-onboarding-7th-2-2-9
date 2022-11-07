@@ -32,7 +32,6 @@ const Wrapper = styled.main`
 
 const Wrap = styled.div`
   flex: 1;
-  height: 100%;
 `;
 
 export default Layout;
