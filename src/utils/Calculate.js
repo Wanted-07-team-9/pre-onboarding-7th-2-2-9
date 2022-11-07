@@ -13,7 +13,7 @@ export const getBeforeDate = startdate => {
   });
 };
 
-export const getAfterDate = (startdate, enddate) => {
+export const getAfterDate = (startdate = '2022-02-01', enddate = '2022-02-03') => {
   return ChartData().then(res => {
     let result = res.filter(el => {
       let time = Date.parse(el.date);
@@ -28,51 +28,42 @@ export const getAfterDate = (startdate, enddate) => {
 };
 
 export const getAverage = arr => {
-  let roas = arr.map(el => el.roas);
-  let cost = arr.map(el => el.cost);
-  let click = arr.map(el => el.click);
-  let conv = arr.map(el => el.conv);
-  let imp = arr.map(el => el.imp);
-  let rev = arr.map(el => {
-    return (el.roas * el.cost) / 100;
-  });
+  let roasArr = arr.map(el => el.roas);
+  let costArr = arr.map(el => el.cost);
+  let clickArr = arr.map(el => el.click);
+  let convArr = arr.map(el => el.conv);
+  let impArr = arr.map(el => el.imp);
+  let convValueArr = arr.map(el => el.convValue);
 
-  const roasSum = roas.reduce(function add(sum, currValue) {
+  const roasSum = roasArr.reduce(function add(sum, currValue) {
     return sum + currValue;
   }, 0);
-  const roasAverage = roasSum / roas.length;
+  const roas = Math.round(roasSum / roasArr.length);
 
-  const costSum = cost.reduce(function add(sum, currValue) {
+  const costSum = costArr.reduce(function add(sum, currValue) {
     return sum + currValue;
   }, 0);
-  const costAverage = costSum / cost.length;
+  const cost = Math.round(costSum / costArr.length);
 
-  const clickSum = click.reduce(function add(sum, currValue) {
+  const clickSum = clickArr.reduce(function add(sum, currValue) {
     return sum + currValue;
   }, 0);
-  const clickAverage = clickSum / click.length;
+  const click = Math.round(clickSum / clickArr.length);
 
-  const convSum = conv.reduce(function add(sum, currValue) {
+  const convSum = convArr.reduce(function add(sum, currValue) {
     return sum + currValue;
   }, 0);
-  const convAverage = convSum / conv.length;
+  const conv = Math.round(convSum / convArr.length);
 
-  const impSum = imp.reduce(function add(sum, currValue) {
+  const impSum = impArr.reduce(function add(sum, currValue) {
     return sum + currValue;
   }, 0);
-  const impAverage = impSum / imp.length;
+  const imp = Math.round(impSum / impArr.length);
 
-  const revSum = rev.reduce(function add(sum, currValue) {
+  const convValueSum = convValueArr.reduce(function add(sum, currValue) {
     return sum + currValue;
   }, 0);
-  const revAverage = revSum / rev.length;
+  const convValue = Math.round(convValueSum / convValueArr.length);
 
-  return [
-    { roasAverage },
-    { costAverage },
-    { clickAverage },
-    { convAverage },
-    { impAverage },
-    { revAverage },
-  ];
+  return [{ roas }, { cost }, { click }, { conv }, { imp }, { convValue }];
 };

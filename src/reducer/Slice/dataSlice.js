@@ -1,8 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  startdate: null,
-  enddate: null,
+  startdate: Date.parse('2022-04-18'),
+  enddate: Date.parse('2022-04-20'),
 };
 
 export const dateSlice = createSlice({
