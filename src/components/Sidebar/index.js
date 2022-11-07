@@ -1,13 +1,8 @@
 import * as Styled from './style';
 import logo from '../../asset/lever_logo.png';
 import { sidebarServiceList, sidebarAdCenterList } from '../../constants/SidebarBtnList';
-const Sidebar = () => {
-  // const navigate = useNavigate();
-  const PageLink = e => {
-    // navigate(`/${e.target.value}`);
-    console.log(e.target.value);
-  };
 
+const Sidebar = () => {
   return (
     <>
       <Styled.SidebarContainer>
@@ -22,11 +17,11 @@ const Sidebar = () => {
           <Styled.SidebarButtons>광고센터</Styled.SidebarButtons>
           {sidebarAdCenterList?.map((el, idx) => {
             return (
-              <a href={el.value} key={idx} style={{ textDecoration: 'none' }}>
-                <Styled.Button type="button" value={el.value} onClick={PageLink}>
+              <div key={idx}>
+                <Styled.Button to={el.value === 'dashboard' ? '/' : '/management'}>
                   {el.name}
                 </Styled.Button>
-              </a>
+              </div>
             );
           })}
         </Styled.SidebarContent>

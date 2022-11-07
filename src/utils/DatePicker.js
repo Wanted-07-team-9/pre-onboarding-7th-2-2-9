@@ -3,7 +3,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { useState } from 'react';
 import { addDays } from 'date-fns';
 import { useDispatch } from 'react-redux';
-import { getStartDate, getEndDate } from '../utils/Slice';
+import { getStartDate, getEndDate } from '../reducer/Slice/dataSlice';
 
 const DatePickerComponent = () => {
   const dispatch = useDispatch();
