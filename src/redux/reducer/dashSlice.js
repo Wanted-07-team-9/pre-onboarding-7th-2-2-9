@@ -1,19 +1,24 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { apis } from '../../api/apis';
 
 const initialState = {
-  item: [],
+  items: [],
   isLoading: false,
   isError: false,
   isPage: false,
+  startDate: '',
+  endDate: '',
+  rangeDate: '',
 };
 
 // 마이 페이지 차트
-export const __DashBoardCharts = createAsyncThunk(
-  'dash/__DashBoardCharts',
+export const __getDashBoardInfos = createAsyncThunk(
+  'dash/__getDashBoardCharts',
   async (arg, thunkAPI) => {
     try {
-      // const { data } = await apis.my_page_chart();
-      return thunkAPI.fulfillWithValue();
+      const res = await apis.getDashAdList();
+      console.log(res);
+      return thunkAPI.fulfillWithValue(res.data.report.daily);
     } catch (e) {
       return thunkAPI.rejectWithValue(e);
     }
@@ -30,22 +35,34 @@ export const dashSlice = createSlice({
     isDashPageOff: state => {
       state.isPage = false;
     },
+    setStartDate: (state, action) => {
+      state.startDate = new Date(action.payload.startDate);
+      state.rangeDate = state.endDate.getDate() - state.startDate.getDate() + 1;
+    },
+    setEndDate: (state, action) => {
+      state.startDate = new Date(action.payload.startDate);
+      state.rangeDate = state.endDate.getDate() - state.startDate.getDate() + 1;
+    },
   },
   extraReducers: builder => {
     builder
-      .addCase(__DashBoardCharts.pending, (state, action) => {
+      .addCase(__getDashBoardInfos.pending, (state, action) => {
         state.isLoading = true;
       })
-      .addCase(__DashBoardCharts.fulfilled, (state, action) => {
+      .addCase(__getDashBoardInfos.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.item = action.payload;
+        state.items = action.payload;
+        state.startDate = new Date(action.payload[0].date);
+        state.endDate = new Date(action.payload[6].date);
+        state.rangeDate = state.endDate.getDate() - state.startDate.getDate() + 1;
+        console.log(state.rangeDate + 1);
       })
-      .addCase(__DashBoardCharts.rejected, (state, action) => {
+      .addCase(__getDashBoardInfos.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = action.payload;
       });
   },
 });
 
-export const { isDashPageOn, isDashPageOff } = dashSlice.actions;
+export const { isDashPageOn, isDashPageOff, setStartDate, setEndDate } = dashSlice.actions;
 export default dashSlice.reducer;

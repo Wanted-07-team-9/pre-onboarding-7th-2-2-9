@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import NotFound from '../pages/NotFound';
 import AdManager from '../pages/AdManager';
 import Main from '../pages/Main';

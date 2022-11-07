@@ -1,13 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
 import PageHeader from '../components/elements/PageHeader';
+import DashCardList from '../components/main/DashCardList';
 
 const Main = () => {
   return (
     <Wrapper>
       <PageHeader title={'대시보드'} isDateTimePicker={true} />
       <Title>통합 광고 현황</Title>
-      <DashBoardsWrapper></DashBoardsWrapper>
+      <DashBoardsWrapper>
+        <DashCardList />
+      </DashBoardsWrapper>
     </Wrapper>
   );
 };

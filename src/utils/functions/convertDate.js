@@ -16,3 +16,8 @@ export const convertAdDate = dates => {
   const date = ('00' + startDate.getDate()).slice(-2);
   return year + '-' + month + '-' + date;
 };
+
+export const convertDashDate = dates => {
+  console.log(dates);
+  // return dates.replace('-', '/');
+};

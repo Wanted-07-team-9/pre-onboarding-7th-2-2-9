@@ -80,10 +80,4 @@ const Select = styled.select`
   }
 `;
 
-const Option = styled.option``;
-
-const StyledDropDownIcon = styled(DropDownIcon)`
-  position: relative;
-`;
-
 export default AdManager;

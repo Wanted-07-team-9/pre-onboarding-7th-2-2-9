@@ -9,6 +9,7 @@ const GlobalStyle = createGlobalStyle`
 body {
 	background-color: #F6F7F8;
   font-family: 'Roboto', sans-serif;
+  overflow-x: auto;
 }
 body * {
 	background-color: transparent;

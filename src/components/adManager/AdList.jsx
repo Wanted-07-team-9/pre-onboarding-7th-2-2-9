@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
+import { useDispatch, useSelector } from 'react-redux';
 import { __getAdList } from '../../redux/reducer/adSlice';
 import AdItem from './AdItem';
 const AdList = () => {

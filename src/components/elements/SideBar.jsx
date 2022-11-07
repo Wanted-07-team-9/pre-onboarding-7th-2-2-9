@@ -117,12 +117,6 @@ const Select = styled.select`
   }
 `;
 
-const Option = styled.option``;
-
-const StyledDropDownIcon = styled(DropDownIcon)`
-  position: relative;
-`;
-
 const MenuWrapper = styled.div`
   margin: 5.3rem 0 25rem 0;
 `;
