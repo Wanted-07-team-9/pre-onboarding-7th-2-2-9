@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ChangeEvent } from 'react';
 import styled from 'styled-components';
 import lever_logo from 'assets/lever_logo.png';
 import { NavLink } from 'react-router-dom';
@@ -8,7 +8,7 @@ import { ReactComponent as AdIcon } from 'assets/AdManage.svg';
 import { ReactComponent as LightIcon } from 'assets/Light.svg';
 
 const Sidebar = () => {
-  const onSelect = e => {
+  const onSelect = (e: ChangeEvent<HTMLSelectElement>) => {
     if (e.target.value === 'addservice') {
       alert('준비중입니다.');
     }

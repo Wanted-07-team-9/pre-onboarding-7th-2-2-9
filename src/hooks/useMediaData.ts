@@ -1,11 +1,11 @@
 import { useAppSelector } from 'redux/hooks';
-import { filterTrendData } from 'utils/mainUtils';
+import { betweenMediaData, convertMediaData } from 'utils/mediaUtils';
 
 const useMediaData = () => {
-  const { startDate, endDate, trendDatas, trendFilter } = useAppSelector(state => state.dashboard);
-
-  const curTrendData = filterTrendData({ trendDatas, startDate, endDate, ...trendFilter });
-  return curTrendData;
+  const { startDate, endDate, mediaDatas } = useAppSelector(state => state.dashboard);
+  const { mergeData, maxData } = betweenMediaData({ mediaDatas, startDate, endDate });
+  const chartMedia = convertMediaData({ mergeData, maxData });
+  return { mergeData, chartMedia };
 };
 
 export default useMediaData;

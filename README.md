@@ -153,8 +153,10 @@ const Trend = () => {
 - 매체현황은 구현 X
 
 ```diff
-@@ 미구현 @@
++ 날짜 선택에 따라 데이터 변경 적용
 ```
+
+<img width="1081" alt="statistics" src="https://user-images.githubusercontent.com/74575497/200299692-bcdd1d20-626a-4869-98c3-07d42dc7cae7.png">
 
 ### **3️⃣ Assignment**
 
