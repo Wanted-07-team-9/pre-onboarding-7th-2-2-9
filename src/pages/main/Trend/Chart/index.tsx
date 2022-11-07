@@ -10,7 +10,7 @@ const Chart = () => {
   const dispatch = useAppDispatch();
   const { trendFilter } = useAppSelector(state => state.dashboard);
   const trendDatas = useChartData();
-
+  console.log(trendDatas);
   const onSelect = useCallback(
     (e: ChangeEvent<HTMLSelectElement>) => {
       dispatch(setTrendFilter({ ...trendFilter, [e.target.name]: e.target.value }));
